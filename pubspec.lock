@@ -49,22 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
-  conditional_builder_null_safety:
-    dependency: "direct main"
-    description:
-      name: conditional_builder_null_safety
-      sha256: "4428f40c20e222acead5e424fb9fba261733fc9da06ef58a08d9477207b0adfd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.6"
-  country_picker:
-    dependency: "direct main"
-    description:
-      name: country_picker
-      sha256: aa975b41c8052298d227ff7ff58d6eddcad0196127445f72af7456224c9ef104
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.20"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -73,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: "3e5c4a94d112540d0c9a6b7f3969832e1604eb8cde0f88d0808382f9f632100b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -136,14 +112,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
   intl:
     dependency: "direct main"
     description:
@@ -325,22 +293,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
-  sqflite:
-    dependency: "direct main"
-    description:
-      name: sqflite
-      sha256: "500d6fec583d2c021f2d25a056d96654f910662c64f836cd2063167b8f1fa758"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.6"
-  sqflite_common:
-    dependency: transitive
-    description:
-      name: sqflite_common
-      sha256: "963dad8c4aa2f814ce7d2d5b1da2f36f31bd1a439d8f27e3dc189bb9d26bc684"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.3"
   stack_trace:
     dependency: transitive
     description:
@@ -365,14 +317,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      sha256: "33b31b6beb98100bf9add464a36a8dd03eb10c7a8cf15aeec535e9b054aaf04b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   term_glyph:
     dependency: transitive
     description:
@@ -389,14 +333,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
-  typed_data:
-    dependency: transitive
-    description:
-      name: typed_data
-      sha256: "26f87ade979c47a150c9eaab93ccd2bebe70a27dc0b4b29517f2904f04eb11a5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.1"
   vector_math:
     dependency: transitive
     description:
@@ -405,38 +341,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  webview_flutter:
-    dependency: "direct main"
-    description:
-      name: webview_flutter
-      sha256: "47663d51a9061451aa3880a214ee9a65dcbb933b77bc44388e194279ab3ccaf6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.7"
-  webview_flutter_android:
-    dependency: transitive
-    description:
-      name: webview_flutter_android
-      sha256: "34f83c2f0f64c75ad75c77a2ccfc8d2e531afbe8ad41af1fd787d6d33336aa90"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.4.3"
-  webview_flutter_platform_interface:
-    dependency: transitive
-    description:
-      name: webview_flutter_platform_interface
-      sha256: "1939c39e2150fb4d30fd3cc59a891a49fed9935db53007df633ed83581b6117b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  webview_flutter_wkwebview:
-    dependency: transitive
-    description:
-      name: webview_flutter_wkwebview
-      sha256: "0b2c65355e4cc5ab5ed1b925421765178b47d647e4e9560bd076fac0b4b88dd4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.2"
   win32:
     dependency: transitive
     description:
@@ -455,4 +359,4 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=2.18.1 <3.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.0.0"
