@@ -33,6 +33,7 @@ ThemeData appLightTheme = ThemeData(
       fontWeight: FontWeight.w600,
     ),
   ),
+  fontFamily: 'Janna',
 );
 
 ThemeData appDarkTheme = ThemeData(
@@ -61,4 +62,5 @@ ThemeData appDarkTheme = ThemeData(
     bodyLarge: TextStyle(
         color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
   ),
+  fontFamily: 'Janna',
 );
