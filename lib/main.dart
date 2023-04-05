@@ -18,22 +18,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShopHandler(),
-      child: BlocConsumer<ShopHandler, ShopState>(
+      create: (context) => MainShopHandler(),
+      child: BlocConsumer<MainShopHandler, ShopState>(
         listener: (context, state) {
           // TODO: implement listener
         },
         builder: (context, state) {
-          ShopHandler shopHandler = BlocProvider.of<ShopHandler>(context);
+          MainShopHandler mainShopHandler =
+              BlocProvider.of<MainShopHandler>(context);
           return MaterialApp(
             title: 'Shop App',
             debugShowCheckedModeBanner: false,
-            themeMode: shopHandler.isDark ? ThemeMode.dark : ThemeMode.light,
+            themeMode:
+                mainShopHandler.isDark ? ThemeMode.dark : ThemeMode.light,
             theme: appLightTheme,
             darkTheme: appDarkTheme,
             home: Directionality(
               textDirection:
-                  shopHandler.isRTL ? TextDirection.rtl : TextDirection.ltr,
+                  mainShopHandler.isRTL ? TextDirection.rtl : TextDirection.ltr,
               child: OnBoardingScreen(),
             ),
           );

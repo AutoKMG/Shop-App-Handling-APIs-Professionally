@@ -4,8 +4,8 @@ import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 part 'state.dart';
 
-class ShopHandler extends Cubit<ShopState> {
-  ShopHandler() : super(ShopStateInitial()) {
+class MainShopHandler extends Cubit<ShopState> {
+  MainShopHandler() : super(ShopStateInitial()) {
     isDark = CacheHelper.getBoolean(key: 'isDark') ?? false;
     isRTL = CacheHelper.getBoolean(key: 'isRTL') ?? false;
   }
