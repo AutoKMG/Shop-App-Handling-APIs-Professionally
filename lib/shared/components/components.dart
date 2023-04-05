@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/shared/components/constants.dart';
 
 Widget defaultButton({
   double width = double.infinity,
