@@ -10,6 +10,7 @@ class LoginHandler extends Cubit<LoginState> {
   LoginHandler() : super(LoginStateInitial());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   bool isPasswordVisible = false;
 
   void userLogin({
