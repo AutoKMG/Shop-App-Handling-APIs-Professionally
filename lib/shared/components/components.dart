@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/shared/components/constants.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -54,14 +55,10 @@ Widget defaultFormField({
       showCursor: showCursor,
       readOnly: readOnly,
       validator: validate,
-      cursorColor: Colors.deepOrange,
-      style: TextStyle(color: Colors.deepOrange),
       decoration: InputDecoration(
-        labelStyle: TextStyle(color: Colors.deepOrange),
         labelText: label,
         prefixIcon: Icon(
           prefix,
-          color: Colors.deepOrange,
         ),
         suffixIcon: suffix != null
             ? IconButton(
