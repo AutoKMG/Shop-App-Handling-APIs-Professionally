@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/logic/login/cubit/handler.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:shop_app/shared/logic/login/handler.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -14,7 +14,28 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            child: BlocBuilder<LoginHandler, LoginState>(
+            child: BlocConsumer<LoginHandler, LoginState>(
+              listener: (context, state) {
+                if (state is LoginStateError) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Login Failed"),
+                        content: Text(state.error),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
               builder: (context, state) {
                 LoginHandler loginHandler =
                     BlocProvider.of<LoginHandler>(context);
@@ -57,7 +78,11 @@ class LoginScreen extends StatelessWidget {
                         defaultFormField(
                           context: context,
                           controller: loginHandler.passwordController,
-                          isPassword: true,
+                          isPassword: loginHandler.isPasswordHidden,
+                          suffix: loginHandler.suffixIcon,
+                          suffixPressed: () {
+                            loginHandler.changePasswordVisibility();
+                          },
                           type: TextInputType.emailAddress,
                           validate: (value) {
                             if (value.isEmpty) {
@@ -65,6 +90,11 @@ class LoginScreen extends StatelessWidget {
                             }
                           },
                           label: 'Password',
+                          onSubmit: (_) {
+                            if (loginHandler.formKey.currentState.validate()) {
+                              loginHandler.userLogin();
+                            }
+                          },
                           prefix: Icons.email_outlined,
                         ),
                         SizedBox(
@@ -74,7 +104,12 @@ class LoginScreen extends StatelessWidget {
                           condition: state is! LoginStateLoading,
                           builder: (context) {
                             return defaultButton(
-                              function: () {},
+                              function: () {
+                                if (loginHandler.formKey.currentState
+                                    .validate()) {
+                                  loginHandler.userLogin();
+                                }
+                              },
                               text: "LOGIN",
                             );
                           },
