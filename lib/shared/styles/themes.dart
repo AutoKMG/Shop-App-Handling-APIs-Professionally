@@ -5,8 +5,6 @@ import 'package:shop_app/shared/styles/colors.dart';
 
 ThemeData appLightTheme = ThemeData(
   primarySwatch: defaultColor,
-  floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
   appBarTheme: AppBarTheme(
     titleSpacing: 20,
     backgroundColor: Colors.white,
