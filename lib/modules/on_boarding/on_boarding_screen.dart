@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/models/boarding_model.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/components/constants.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -23,15 +24,7 @@ class OnBoardingScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LoginScreen();
-                  },
-                ),
-                (Route<dynamic> route) => false,
-              );
+              finishOnBoarding(context);
             },
             child: Text(
               "SKIP",
@@ -96,15 +89,7 @@ class OnBoardingScreen extends StatelessWidget {
                   child: Icon(Icons.arrow_forward_ios_rounded),
                   onPressed: () {
                     if (isLastPage) {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginScreen();
-                          },
-                        ),
-                        (Route<dynamic> route) => false,
-                      );
+                      finishOnBoarding(context);
                     } else {
                       boardController.nextPage(
                         duration: Duration(milliseconds: 1000),
@@ -119,6 +104,24 @@ class OnBoardingScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void finishOnBoarding(
+    BuildContext context,
+  ) {
+    CacheHelper.putData(key: 'isOnBoardingDone', value: true).then((value) {
+      if (value) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LoginScreen();
+            },
+          ),
+          (Route<dynamic> route) => false,
+        );
+      }
+    });
   }
 
   Widget buildBoardingItem(BoardingModel model) {
