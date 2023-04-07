@@ -6,11 +6,15 @@ part 'state.dart';
 
 class MainShopHandler extends Cubit<ShopState> {
   MainShopHandler() : super(ShopStateInitial()) {
-    isDark = CacheHelper.getBoolean(key: 'isDark') ?? false;
-    isRTL = CacheHelper.getBoolean(key: 'isRTL') ?? false;
+    isDark = CacheHelper.getData(key: 'isDark') ?? false;
+    isRTL = CacheHelper.getData(key: 'isRTL') ?? false;
+    isBoardingDone = CacheHelper.getData(key: 'isBoardingDone');
+    token = CacheHelper.getData(key: 'token');
   }
   bool isRTL;
   bool isDark;
+  bool isBoardingDone;
+  String token;
 
   List<BottomNavigationBarItem> bottomNavItems = [
     BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Business'),
@@ -21,14 +25,14 @@ class MainShopHandler extends Cubit<ShopState> {
 
   void changeDirection() {
     isRTL = !isRTL;
-    CacheHelper.putBoolean(key: 'isRTL', value: isRTL).then((_) {
+    CacheHelper.putData(key: 'isRTL', value: isRTL).then((_) {
       emit(ShopStateToggleDirectionality());
     });
   }
 
   void toggleDarkTheme() {
     isDark = !isDark;
-    CacheHelper.putBoolean(key: 'isDark', value: isDark).then((_) {
+    CacheHelper.putData(key: 'isDark', value: isDark).then((_) {
       emit(ShopStateToggleDarkTheme());
     });
   }
