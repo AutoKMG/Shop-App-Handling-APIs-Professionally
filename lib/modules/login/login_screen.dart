@@ -16,24 +16,16 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: BlocConsumer<LoginHandler, LoginState>(
               listener: (context, state) {
+                if (state is LoginStateSuccessful) {
+                  if (state.shopLoginModel.status) {
+                    showFlutterToast(
+                        state.shopLoginModel.messgae, Colors.green);
+                  } else {
+                    showFlutterToast(state.shopLoginModel.messgae, Colors.red);
+                  }
+                }
                 if (state is LoginStateError) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Login Failed"),
-                        content: Text(state.error),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text("Close"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                  showFlutterToast(state.error, Colors.red);
                 }
               },
               builder: (context, state) {
