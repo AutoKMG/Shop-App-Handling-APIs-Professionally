@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/boarding_mode.dart';
+import 'package:shop_app/models/boarding_model.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
