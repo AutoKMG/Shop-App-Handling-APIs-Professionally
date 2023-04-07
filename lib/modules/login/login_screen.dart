@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:shop_app/shared/logic/login/handler.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -18,6 +20,21 @@ class LoginScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is LoginStateSuccessful) {
                   if (state.shopLoginModel.status) {
+                    CacheHelper.putData(
+                            key: 'token',
+                            value: state.shopLoginModel.data.token)
+                        .then(
+                      (value) {
+                        if (value) {
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(
+                            builder: (context) {
+                              return ShopLayout();
+                            },
+                          ), (route) => false);
+                        }
+                      },
+                    );
                     showFlutterToast(
                         state.shopLoginModel.messgae, Colors.green);
                   } else {
