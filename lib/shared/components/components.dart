@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -70,7 +71,16 @@ Widget defaultFormField({
         border: OutlineInputBorder(),
       ),
     );
-
+void showFlutterToast(String message, Color color) {
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: color,
+      textColor: Colors.white,
+      fontSize: 16.0);
+}
 /*
 Widget buildArticleItem(article, context) {
   return InkWell(
