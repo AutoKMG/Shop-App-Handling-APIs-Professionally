@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/shared/logic/shop/handler.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
             home: Directionality(
               textDirection:
                   mainShopHandler.isRTL ? TextDirection.rtl : TextDirection.ltr,
-              child: OnBoardingScreen(),
+              child: mainShopHandler.displayedWidget,
             ),
           );
         },
