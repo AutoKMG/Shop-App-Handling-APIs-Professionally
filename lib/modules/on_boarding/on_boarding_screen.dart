@@ -48,7 +48,6 @@ class OnBoardingScreen extends StatelessWidget {
               itemCount: boarding.length,
               physics: new NeverScrollableScrollPhysics(),
               onPageChanged: (value) {
-                print(value);
                 if (value == boarding.length - 1) {
                   isLastPage = true;
                 } else {
