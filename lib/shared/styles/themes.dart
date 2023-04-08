@@ -21,7 +21,7 @@ ThemeData appLightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     elevation: 20,
-    selectedItemColor: Colors.deepOrange,
+    selectedItemColor: defaultColor,
     type: BottomNavigationBarType.fixed,
   ),
   textTheme: TextTheme(
