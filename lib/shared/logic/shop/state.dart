@@ -1,10 +1,12 @@
 part of 'handler.dart';
 
 @immutable
-abstract class ShopState {}
+abstract class MainShopState {}
 
-class ShopStateInitial extends ShopState {}
+class MainShopStateInitial extends MainShopState {}
 
-class ShopStateToggleDirectionality extends ShopState {}
+class MainShopStateToggleDirectionality extends MainShopState {}
 
-class ShopStateToggleDarkTheme extends ShopState {}
+class MainShopStateToggleDarkTheme extends MainShopState {}
+
+class MainShopStateBottomNavBarIndexChanged extends MainShopState {}
