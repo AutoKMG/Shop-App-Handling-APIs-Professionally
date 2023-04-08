@@ -1,13 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/shop_layout.dart';
+import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/categories/categories_screen.dart';
 import 'package:shop_app/modules/favorites/favorites_screen.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
 import 'package:shop_app/modules/products/products_screen.dart';
 import 'package:shop_app/modules/settings/settings_screen.dart';
+import 'package:shop_app/shared/network/end_points.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
+import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
 part 'state.dart';
 
@@ -32,6 +35,7 @@ class MainShopHandler extends Cubit<MainShopState> {
   String token;
   Widget displayedWidget;
   int currentIndex = 0;
+  HomeModel homeData;
   List<Widget> screens = [
     ProductsScreen(),
     CategoriesScreen(),
@@ -63,5 +67,15 @@ class MainShopHandler extends Cubit<MainShopState> {
   void changeCurrentBottomNavIndex(int index) {
     currentIndex = index;
     emit(MainShopStateBottomNavBarIndexChanged());
+  }
+
+  void getHomeData() {
+    emit(MainShopStateProductsRetrieveLoading());
+    DioHelper.getData(url: HOME).then((value) {
+      homeData = HomeModel.fromJson(value.data);
+      emit(MainShopStateProductsRetrieveDone());
+    }).catchError((error) {
+      emit(MainShopStateProductsRetrieveError(error.toString()));
+    });
   }
 }
