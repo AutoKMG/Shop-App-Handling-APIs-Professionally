@@ -1,5 +1,5 @@
 class HomeModel {
-  String status;
+  bool status;
   HomeDataModel data;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
@@ -14,10 +14,10 @@ class HomeDataModel {
 
   HomeDataModel.fromJson(Map<String, dynamic> json) {
     json['banners'].forEach((element) {
-      banners.add(element);
+      banners.add(BannerModel.fromJson(element));
     });
     json['products'].forEach((element) {
-      products.add(element);
+      products.add(ProductModel.fromJson(element));
     });
   }
 }
@@ -39,7 +39,7 @@ class ProductModel {
   dynamic discount;
   String image;
   String name;
-  List<String> images;
+  List<dynamic> images;
   bool inFavorties;
   bool inCart;
 
