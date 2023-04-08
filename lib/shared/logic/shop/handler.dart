@@ -28,6 +28,7 @@ class MainShopHandler extends Cubit<MainShopState> {
     } else {
       displayedWidget = OnBoardingScreen();
     }
+    getHomeData();
   }
   bool isRTL;
   bool isDark;
@@ -71,10 +72,11 @@ class MainShopHandler extends Cubit<MainShopState> {
 
   void getHomeData() {
     emit(MainShopStateProductsRetrieveLoading());
-    DioHelper.getData(url: HOME).then((value) {
+    DioHelper.getData(url: HOME, token: token).then((value) {
       homeData = HomeModel.fromJson(value.data);
       emit(MainShopStateProductsRetrieveDone());
     }).catchError((error) {
+      print(error.toString());
       emit(MainShopStateProductsRetrieveError(error.toString()));
     });
   }
