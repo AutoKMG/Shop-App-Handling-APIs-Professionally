@@ -28,3 +28,22 @@ class MainShopStateCategoriesRetrieveError extends MainShopState {
   final String error;
   MainShopStateCategoriesRetrieveError(this.error);
 }
+
+class MainShopStateLocalProductFavoriteChange extends MainShopState {}
+
+class MainShopStateProductFavoriteChangeSuccess extends MainShopState {}
+
+class MainShopProductFavoriteChangeError extends MainShopState {
+  final String error;
+
+  MainShopProductFavoriteChangeError(this.error);
+}
+
+class MainShopStateFavoritesRetrieveDone extends MainShopState {}
+
+class MainShopStateFavoritesRetrieveLoading extends MainShopState {}
+
+class MainShopStateFavoritesRetrieveError extends MainShopState {
+  final String error;
+  MainShopStateFavoritesRetrieveError(this.error);
+}
