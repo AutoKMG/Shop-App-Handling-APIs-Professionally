@@ -15,7 +15,7 @@ class DioHelper {
   static Future<Response> getData(
       {@required String url,
       Map<String, dynamic> query,
-      String lang = 'en',
+      @required String lang,
       String token}) async {
     dio.options.headers = {
       'lang': lang,
