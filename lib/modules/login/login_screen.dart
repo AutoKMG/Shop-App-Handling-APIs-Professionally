@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -35,14 +36,15 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                     );
-                    showFlutterToast(
-                        state.shopLoginModel.messgae, Colors.green);
+                    showFlutterToast(state.shopLoginModel.messgae, Colors.green,
+                        Toast.LENGTH_LONG);
                   } else {
-                    showFlutterToast(state.shopLoginModel.messgae, Colors.red);
+                    showFlutterToast(state.shopLoginModel.messgae, Colors.red,
+                        Toast.LENGTH_LONG);
                   }
                 }
                 if (state is LoginStateError) {
-                  showFlutterToast(state.error, Colors.red);
+                  showFlutterToast(state.error, Colors.red, Toast.LENGTH_LONG);
                 }
               },
               builder: (context, state) {
