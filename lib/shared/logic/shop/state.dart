@@ -19,3 +19,12 @@ class MainShopStateProductsRetrieveError extends MainShopState {
   final String error;
   MainShopStateProductsRetrieveError(this.error);
 }
+
+class MainShopStateCategoriesRetrieveDone extends MainShopState {}
+
+class MainShopStateCategoriesRetrieveLoading extends MainShopState {}
+
+class MainShopStateCategoriesRetrieveError extends MainShopState {
+  final String error;
+  MainShopStateCategoriesRetrieveError(this.error);
+}
