@@ -71,10 +71,10 @@ Widget defaultFormField({
         border: OutlineInputBorder(),
       ),
     );
-void showFlutterToast(String message, Color color) {
+void showFlutterToast(String message, Color color, Toast toastLength) {
   Fluttertoast.showToast(
       msg: message,
-      toastLength: Toast.LENGTH_LONG,
+      toastLength: toastLength,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       backgroundColor: color,
