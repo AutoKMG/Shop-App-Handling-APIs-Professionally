@@ -51,7 +51,7 @@ class ProductModel {
     this.image = json['image'];
     this.name = json['name'];
     this.images = json['images'];
-    this.inFavorties = json['in_favorties'];
+    this.inFavorties = json['in_favorites'];
     this.inCart = json['in_cart'];
   }
 }
