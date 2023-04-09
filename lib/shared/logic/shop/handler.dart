@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/shop_layout.dart';
+import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/categories/categories_screen.dart';
 import 'package:shop_app/modules/favorites/favorites_screen.dart';
@@ -20,6 +21,7 @@ class MainShopHandler extends Cubit<MainShopState> {
     isRTL = CacheHelper.getData(key: 'isRTL') ?? false;
     isOnBoardingDone = CacheHelper.getData(key: 'isOnBoardingDone') ?? false;
     token = CacheHelper.getData(key: 'token');
+    lang = CacheHelper.getData(key: 'lang') ?? 'en';
     if (isOnBoardingDone) {
       if (token != null)
         displayedWidget = ShopLayout();
@@ -29,6 +31,7 @@ class MainShopHandler extends Cubit<MainShopState> {
       displayedWidget = OnBoardingScreen();
     }
     getHomeData();
+    getCategories();
   }
   bool isRTL;
   bool isDark;
@@ -37,6 +40,8 @@ class MainShopHandler extends Cubit<MainShopState> {
   Widget displayedWidget;
   int currentIndex = 0;
   HomeModel homeData;
+  CategoriesModel categoriesData;
+  String lang;
   List<Widget> screens = [
     ProductsScreen(),
     CategoriesScreen(),
@@ -72,12 +77,26 @@ class MainShopHandler extends Cubit<MainShopState> {
 
   void getHomeData() {
     emit(MainShopStateProductsRetrieveLoading());
-    DioHelper.getData(url: HOME, token: token).then((value) {
+    DioHelper.getData(url: HOME, token: token, lang: lang).then((value) {
       homeData = HomeModel.fromJson(value.data);
       emit(MainShopStateProductsRetrieveDone());
     }).catchError((error) {
       print(error.toString());
       emit(MainShopStateProductsRetrieveError(error.toString()));
+    });
+  }
+
+  void getCategories() {
+    emit(MainShopStateCategoriesRetrieveLoading());
+
+    DioHelper.getData(url: GET_CATEGORIES, lang: lang).then(
+      (value) {
+        categoriesData = CategoriesModel.fromJson(value.data);
+        emit(MainShopStateCategoriesRetrieveDone());
+      },
+    ).catchError((error) {
+      print(error.toString());
+      emit(MainShopStateCategoriesRetrieveError(error.toString()));
     });
   }
 }
