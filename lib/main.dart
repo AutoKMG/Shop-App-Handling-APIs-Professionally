@@ -20,10 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MainShopHandler(),
-      child: BlocConsumer<MainShopHandler, MainShopState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      child: BlocBuilder<MainShopHandler, MainShopState>(
         builder: (context, state) {
           MainShopHandler mainShopHandler =
               BlocProvider.of<MainShopHandler>(context);
