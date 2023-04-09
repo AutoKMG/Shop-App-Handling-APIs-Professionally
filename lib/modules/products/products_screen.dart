@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/main.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/shared/components/constants.dart';
@@ -19,10 +20,7 @@ class ProductsScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: mainShopHandler.homeData != null &&
               mainShopHandler.categoriesData != null,
-          builder: (context) => builderWidget(
-            mainShopHandler.homeData,
-            mainShopHandler.categoriesData,
-          ),
+          builder: (context) => builderWidget(mainShopHandler),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
@@ -30,13 +28,13 @@ class ProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget builderWidget(HomeModel homeDate, CategoriesModel categoriesModel) {
+  Widget builderWidget(MainShopHandler mainShopHandler) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
           CarouselSlider(
-            items: homeDate.data.banners.map((e) {
+            items: mainShopHandler.homeData.data.banners.map((e) {
               return Image(
                 image: NetworkImage(e.image.split(' ').join('%20')),
                 fit: BoxFit.cover,
@@ -72,14 +70,15 @@ class ProductsScreen extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return categoryBuilder(categoriesModel.data.data[index]);
+                      return categoryBuilder(
+                          mainShopHandler.categoriesData.data.data[index]);
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
                         width: 10,
                       );
                     },
-                    itemCount: categoriesModel.data.data.length,
+                    itemCount: mainShopHandler.categoriesData.data.data.length,
                   ),
                 ),
                 SizedBox(
@@ -101,8 +100,8 @@ class ProductsScreen extends StatelessWidget {
               childAspectRatio: 1 / 1.57,
               mainAxisSpacing: 1,
               crossAxisSpacing: 1,
-              children: homeDate.data.products
-                  .map((e) => gridProductBuilder(e))
+              children: mainShopHandler.homeData.data.products
+                  .map((e) => gridProductBuilder(e, mainShopHandler))
                   .toList(),
             ),
           ),
@@ -149,7 +148,8 @@ class ProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget gridProductBuilder(ProductModel product) {
+  Widget gridProductBuilder(
+      ProductModel product, MainShopHandler mainShopHandler) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -158,10 +158,13 @@ class ProductsScreen extends StatelessWidget {
           Stack(
             alignment: AlignmentDirectional.bottomStart,
             children: [
-              Image(
-                image: NetworkImage(product.image),
-                width: 175,
-                height: 175,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image(
+                  image: NetworkImage(product.image),
+                  width: 175,
+                  height: 175,
+                ),
               ),
               if (product.discount != 0)
                 Container(
@@ -205,9 +208,21 @@ class ProductsScreen extends StatelessWidget {
                         width: 5,
                       ),
                       Spacer(),
-                      IconButton(
-                        icon: Icon(Icons.favorite_outline_rounded),
-                        onPressed: () {},
+                      CircleAvatar(
+                        backgroundColor: mainShopHandler.favorites[product.id]
+                            ? defaultColor
+                            : Colors.grey,
+                        child: IconButton(
+                          icon: Icon(
+                            mainShopHandler.favorites[product.id]
+                                ? Icons.favorite
+                                : Icons.favorite_outline_rounded,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            mainShopHandler.toggleProductFavorite(product.id);
+                          },
+                        ),
                       )
                     ],
                   )
