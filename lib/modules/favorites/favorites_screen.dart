@@ -18,7 +18,8 @@ class FavrotiesScreen extends StatelessWidget {
       MainShopHandler mainShopHandler =
           BlocProvider.of<MainShopHandler>(context);
       return ConditionalBuilder(
-        condition: state is! MainShopStateFavoritesRetrieveLoading,
+        condition: mainShopHandler.favoritesData != null &&
+            mainShopHandler.homeData != null,
         builder: (context) {
           return ListView.separated(
             itemBuilder: (context, index) {
