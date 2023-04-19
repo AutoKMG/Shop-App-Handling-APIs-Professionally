@@ -5,6 +5,7 @@ import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/models/shop_login_model.dart';
 import 'package:shop_app/modules/categories/categories_screen.dart';
 import 'package:shop_app/modules/favorites/favorites_screen.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
@@ -20,10 +21,17 @@ part 'state.dart';
 
 class MainShopHandler extends Cubit<MainShopState> {
   MainShopHandler() : super(MainShopStateInitial()) {
+    init();
+  }
+  void init() {
     isDark = CacheHelper.getData(key: 'isDark') ?? false;
     isRTL = CacheHelper.getData(key: 'isRTL') ?? false;
     isOnBoardingDone = CacheHelper.getData(key: 'isOnBoardingDone') ?? false;
     token = CacheHelper.getData(key: 'token');
+    homeData = null;
+    categoriesData = null;
+    favoritesData = null;
+    userModel = null;
     print(token);
     lang = CacheHelper.getData(key: 'lang') ?? 'en';
     if (isOnBoardingDone) {
@@ -37,7 +45,9 @@ class MainShopHandler extends Cubit<MainShopState> {
     getHomeData();
     getCategories();
     getFavorites();
+    getProfile();
   }
+
   bool isRTL;
   bool isDark;
   bool isOnBoardingDone;
@@ -47,6 +57,7 @@ class MainShopHandler extends Cubit<MainShopState> {
   HomeModel homeData;
   CategoriesModel categoriesData;
   FavoritesModel favoritesData;
+  ShopLoginModel userModel;
   String lang;
   Map<int, bool> favorites = {};
   List<Widget> screens = [
@@ -144,6 +155,16 @@ class MainShopHandler extends Cubit<MainShopState> {
     ).catchError((error) {
       print(error.toString());
       emit(MainShopStateFavoritesRetrieveError(error.toString()));
+    });
+  }
+
+  void getProfile() {
+    DioHelper.getData(url: PROFILE, lang: lang, token: token).then((value) {
+      userModel = ShopLoginModel.fromJson(value.data);
+      emit(MainShopStateProfileRetrieveDone());
+    }).catchError((error) {
+      print(error.toString());
+      emit(MainShopStateProfileRetrieveError(error.toString()));
     });
   }
 }

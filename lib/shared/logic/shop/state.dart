@@ -47,3 +47,12 @@ class MainShopStateFavoritesRetrieveError extends MainShopState {
   final String error;
   MainShopStateFavoritesRetrieveError(this.error);
 }
+
+class MainShopStateProfileRetrieveDone extends MainShopState {}
+
+class MainShopStateProfileRetrieveLoading extends MainShopState {}
+
+class MainShopStateProfileRetrieveError extends MainShopState {
+  final String error;
+  MainShopStateProfileRetrieveError(this.error);
+}
