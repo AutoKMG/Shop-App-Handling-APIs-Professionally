@@ -1,11 +1,11 @@
 class ShopLoginModel {
   bool status;
-  String messgae;
+  String message;
   UserData data;
 
   ShopLoginModel.fromJson(Map<String, dynamic> json) {
     this.status = json['status'];
-    this.messgae = json['message'];
+    this.message = json['message'];
     this.data = json['data'] != null ? UserData.fromJson(json['data']) : null;
   }
 }
