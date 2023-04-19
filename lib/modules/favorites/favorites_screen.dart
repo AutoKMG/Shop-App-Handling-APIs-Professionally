@@ -4,7 +4,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/favorites_model.dart';
-import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/logic/shop/handler.dart';
 
