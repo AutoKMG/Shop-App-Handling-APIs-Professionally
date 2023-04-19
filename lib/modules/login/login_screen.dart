@@ -5,6 +5,7 @@ import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:shop_app/shared/logic/login/handler.dart';
+import 'package:shop_app/shared/logic/shop/handler.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,6 +20,8 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: BlocConsumer<LoginHandler, LoginState>(
               listener: (context, state) {
+                MainShopHandler mainShopHandler =
+                    BlocProvider.of<MainShopHandler>(context);
                 if (state is LoginStateSuccessful) {
                   if (state.shopLoginModel.status) {
                     CacheHelper.putData(
@@ -27,6 +30,7 @@ class LoginScreen extends StatelessWidget {
                         .then(
                       (value) {
                         if (value) {
+                          mainShopHandler.init();
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(
                             builder: (context) {
@@ -36,10 +40,10 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                     );
-                    showFlutterToast(state.shopLoginModel.messgae, Colors.green,
+                    showFlutterToast(state.shopLoginModel.message, Colors.green,
                         Toast.LENGTH_LONG);
                   } else {
-                    showFlutterToast(state.shopLoginModel.messgae, Colors.red,
+                    showFlutterToast(state.shopLoginModel.message, Colors.red,
                         Toast.LENGTH_LONG);
                   }
                 }
