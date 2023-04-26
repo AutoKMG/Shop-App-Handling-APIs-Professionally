@@ -7,3 +7,5 @@ const GET_CATEGORIES = 'categories';
 const FAVORITES = 'favorites';
 
 const PROFILE = 'profile';
+
+const REGISTER = 'register';
