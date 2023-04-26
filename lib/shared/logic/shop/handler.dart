@@ -159,12 +159,32 @@ class MainShopHandler extends Cubit<MainShopState> {
   }
 
   void getProfile() {
+    emit(MainShopStateProfileRetrieveLoading());
     DioHelper.getData(url: PROFILE, lang: lang, token: token).then((value) {
       userModel = ShopLoginModel.fromJson(value.data);
       emit(MainShopStateProfileRetrieveDone());
     }).catchError((error) {
       print(error.toString());
       emit(MainShopStateProfileRetrieveError(error.toString()));
+    });
+  }
+
+  void updateProfile({
+    @required String name,
+    @required String email,
+    @required String phone,
+  }) {
+    emit(MainShopStateProfileUpdateLoading());
+    DioHelper.putData(url: UPDATE_PROFILE, lang: lang, token: token, data: {
+      "name": name,
+      "email": email,
+      "phone": phone,
+    }).then((value) {
+      userModel = ShopLoginModel.fromJson(value.data);
+      emit(MainShopStateProfileUpdateDone());
+    }).catchError((error) {
+      print(error.toString());
+      emit(MainShopStateProfileUpdateError(error.toString()));
     });
   }
 }

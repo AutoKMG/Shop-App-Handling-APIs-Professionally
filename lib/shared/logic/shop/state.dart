@@ -56,3 +56,12 @@ class MainShopStateProfileRetrieveError extends MainShopState {
   final String error;
   MainShopStateProfileRetrieveError(this.error);
 }
+
+class MainShopStateProfileUpdateDone extends MainShopState {}
+
+class MainShopStateProfileUpdateLoading extends MainShopState {}
+
+class MainShopStateProfileUpdateError extends MainShopState {
+  final String error;
+  MainShopStateProfileUpdateError(this.error);
+}
