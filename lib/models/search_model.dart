@@ -10,20 +10,20 @@ class SearchModel {
 
 class SearchModelData {
   int currentPage;
-  SearchModelProductData productData;
+  List<SearchModelProductData> productData = [];
   int total;
   SearchModelData.fromJson(Map<String, dynamic> json) {
     this.currentPage = json['current_page'];
-    this.productData = json['data'] != null
-        ? SearchModelProductData.fromJson(json['data'])
-        : null;
+    json['data'].forEach((element) {
+      productData.add(SearchModelProductData.fromJson(element));
+    });
     this.total = json['total'];
   }
 }
 
 class SearchModelProductData {
   int id;
-  String price;
+  dynamic price;
   String image;
   String name;
   String description;
